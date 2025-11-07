@@ -11,9 +11,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
 
+    public Transform visual;
+    private Animator anim;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = visual.GetComponent<Animator>();
     }
 
     void Update()
@@ -24,6 +28,16 @@ public class PlayerMovement : MonoBehaviour
         // Horizontal movement (A/D or Left/Right arrows)
         float moveInput = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+
+        anim.SetBool("isrunning", Mathf.Abs(moveInput) > 0f && isGrounded);
+        if (moveInput > 0.01f)
+        {
+            visual.localScale = new Vector3(4, 4, 4);
+        }
+        else if (moveInput < -0.01f)
+        {
+            visual.localScale = new Vector3(-4, 4, 4);
+        }
 
         // Jump
         if (Input.GetButtonDown("Jump") && isGrounded)
