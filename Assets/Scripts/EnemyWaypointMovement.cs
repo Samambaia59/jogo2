@@ -4,22 +4,28 @@ using System.Collections.Generic;
 public class EnemyWaypointMovement : MonoBehaviour
 {
     [Header("Waypoints")]
-    public List<Transform> waypoints; // Assign your ... (comentário cortado na imagem)
+    public List<Transform> waypoints;
 
     [Header("Movement Settings")]
     public float moveSpeed = 3f;
     public float waypointReachedDistance = 0.1f;
     public bool loop = true;
 
+    [Header("Combat Settings")] // Configurações de ataque adicionadas
+    public float damage = 10f;
+    public float attackCooldown = 1f;
+    public float knockbackForce = 15f;
+
     private Rigidbody2D rb;
     private int currentWaypointIndex = 0;
     private Vector2 movementDirection;
+    private float lastAttackTime; // Controle de tempo do ataque
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        // Validate that we have waypoints
+        // Validação dos Waypoints
         if (waypoints == null || waypoints.Count == 0)
         {
             Debug.LogError("No waypoints assigned to the enemy!");
@@ -27,7 +33,6 @@ public class EnemyWaypointMovement : MonoBehaviour
             return;
         }
 
-        // Start moving towards the first waypoint
         SetTargetWaypoint(currentWaypointIndex);
     }
 
@@ -36,6 +41,8 @@ public class EnemyWaypointMovement : MonoBehaviour
         MoveTowardsWaypoint();
         CheckIfWaypointReached();
     }
+
+    // --- LÓGICA DE MOVIMENTAÇÃO (Igual ao seu código) ---
 
     void SetTargetWaypoint(int index)
     {
@@ -50,11 +57,10 @@ public class EnemyWaypointMovement : MonoBehaviour
     {
         if (waypoints.Count == 0) return;
 
-        // Update direction every frame for better path correction
         Vector2 targetPosition = waypoints[currentWaypointIndex].position;
         movementDirection = (targetPosition - (Vector2)transform.position).normalized;
 
-        // Set linear velocity towards the current waypoint
+        // Movimento
         rb.linearVelocity = movementDirection * moveSpeed;
     }
 
@@ -72,13 +78,8 @@ public class EnemyWaypointMovement : MonoBehaviour
 
     void GoToNextWaypoint()
     {
-        // Remove the stop for smoother movement
-        // rb.linearVelocity = Vector2.zero;
-
-        // Move to next waypoint
         currentWaypointIndex++;
 
-        // Handle reaching the end of waypoints
         if (currentWaypointIndex >= waypoints.Count)
         {
             if (loop)
@@ -87,14 +88,50 @@ public class EnemyWaypointMovement : MonoBehaviour
             }
             else
             {
-                // Stop moving if not looping
                 enabled = false;
                 rb.linearVelocity = Vector2.zero;
                 return;
             }
         }
 
-        // Set new target waypoint
         SetTargetWaypoint(currentWaypointIndex);
+    }
+
+    // --- LÓGICA DE COMBATE (Adicionada) ---
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            TryAttackPlayer(collision.gameObject);
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            TryAttackPlayer(collision.gameObject);
+        }
+    }
+
+    void TryAttackPlayer(GameObject player)
+    {
+        // Verifica o tempo de recarga (Cooldown)
+        if (Time.time >= lastAttackTime + attackCooldown)
+        {
+            // PROCURA PELO MainCharacterController
+            MainCharacterController controller = player.GetComponent<MainCharacterController>();
+
+            if (controller != null)
+            {
+                Vector2 knockbackDirection = (player.transform.position - transform.position).normalized;
+
+                // Chama o TakeDamage no MainCharacterController
+                controller.TakeDamage(damage, knockbackDirection, knockbackForce);
+
+                lastAttackTime = Time.time;
+            }
+        }
     }
 }
