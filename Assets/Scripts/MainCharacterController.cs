@@ -60,11 +60,11 @@ public class MainCharacterController : MonoBehaviour
         // Virar o personagem (Flip)
         if (moveInput > 0.01f)
         {
-            visual.localScale = new Vector3(4, 4, 4); // Direita
+            visual.localScale = new Vector3(1, 1, 1); // Direita
         }
         else if (moveInput < -0.01f)
         {
-            visual.localScale = new Vector3(-4, 4, 4); // Esquerda
+            visual.localScale = new Vector3(-1, 1, 1); // Esquerda
         }
 
         // Pulo
