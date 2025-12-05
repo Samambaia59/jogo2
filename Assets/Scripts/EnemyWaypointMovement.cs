@@ -115,6 +115,10 @@ public class EnemyWaypointMovement : MonoBehaviour
         }
     }
 
+public void Jump(float jumpForce)
+    {
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+    }
     void TryAttackPlayer(GameObject player)
     {
         // Verifica o tempo de recarga (Cooldown)
