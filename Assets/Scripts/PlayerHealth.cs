@@ -19,10 +19,10 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage, Vector2 knockbackDirection, float knockbackForce = 10f)
     {
         currentHealth -= damage;
-        Debug.Log("Player levou dano! Vida atual: " + currentHealth);
         
         // Aplica knockback
-        rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+        //rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+        rb.linearVelocity = knockbackDirection * knockbackForce;
         
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
 
