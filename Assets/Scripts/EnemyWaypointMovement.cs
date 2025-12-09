@@ -125,14 +125,14 @@ public void Jump(float jumpForce)
         if (Time.time >= lastAttackTime + attackCooldown)
         {
             // PROCURA PELO MainCharacterController
-            MainCharacterController controller = player.GetComponent<MainCharacterController>();
+            PlayerHealth ph = player.GetComponent<PlayerHealth>();
 
-            if (controller != null)
+            if (ph != null)
             {
                 Vector2 knockbackDirection = (player.transform.position - transform.position).normalized;
 
                 // Chama o TakeDamage no MainCharacterController
-                controller.TakeDamage(damage, knockbackDirection, knockbackForce);
+                ph.TakeDamage(damage, knockbackDirection, knockbackForce);
 
                 lastAttackTime = Time.time;
             }
