@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 40b8b12cc17b8644995763013aa84982
+guid: ce9a60626ea8a794b854a76ae4e0a8dd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8233872967988825258
-    second: fundo_minecraft-removebg-preview (1)_0
+      213: -824634444736196842
+    second: lua-removebg-preview_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fundo_minecraft-removebg-preview (1)_0
+      name: lua-removebg-preview_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 275
-        height: 183
+        x: 43
+        y: 49
+        width: 139
+        height: 140
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 653b55919286bbd80800000000000000
-      internalID: -8233872967988825258
+      spriteID: 61f82f3775f4e84f0800000000000000
+      internalID: -824634444736196842
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      fundo_minecraft-removebg-preview (1)_0: -8233872967988825258
+      lua-removebg-preview_0: -824634444736196842
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
