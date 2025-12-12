@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; // <--- 1. ADICIONEI ESTA BIBLIOTECA PARA REINICIAR A FASE
 
 public class MainCharacterController : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class MainCharacterController : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
 
-    // --- ADICIONADO: Configurações de Tiro ---
+    // --- Configurações de Tiro ---
     [Header("Combat Settings")]
     public Transform firePoint;      // Onde o tiro nasce
     public GameObject bulletPrefab;  // O prefab da bala
@@ -81,7 +82,7 @@ public class MainCharacterController : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
 
-        // --- ADICIONADO: Input de Tiro ---
+        // --- Input de Tiro ---
         if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
         {
             Shoot();
@@ -90,7 +91,7 @@ public class MainCharacterController : MonoBehaviour
         // ---------------------------------
     }
 
-    // --- ADICIONADO: Função Shoot ---
+    // --- Função Shoot ---
     void Shoot()
     {
         if (firePoint != null && bulletPrefab != null)
@@ -99,7 +100,7 @@ public class MainCharacterController : MonoBehaviour
             
             if (anim != null)
             {
-                // Usamos "SetTrigger" porque o tiro é uma ação rápida, não um estado contínuo
+                // Usamos "SetTrigger" porque o tiro é uma ação rápida
                 anim.SetTrigger("isshooting"); 
             }
         }
@@ -107,7 +108,6 @@ public class MainCharacterController : MonoBehaviour
     // --------------------------------
 
     // --- LÓGICA DE VIDA E DANO ---
-    // Este método é chamado pelo Inimigo
     public void TakeDamage(float damage, Vector2 knockbackDirection, float knockbackForce = 10f)
     {
         currentHealth -= damage;
@@ -129,7 +129,10 @@ public class MainCharacterController : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Player morreu!");
-        gameObject.SetActive(false); // Desativa o player da cena
+        Debug.Log("Player morreu! Reiniciando...");
+        
+        // --- 2. MUDEI SÓ AQUI: Em vez de desativar, ele recarrega a fase ---
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // ------------------------------------------------------------------
     }
 }

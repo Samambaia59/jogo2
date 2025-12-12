@@ -24,19 +24,17 @@ public class Bullet : MonoBehaviour
     }
 
     // Chamado quando o projétil colide com outro objeto.
-    void OnTriggerEnter2D(Collider2D hitInfo)
+   void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        // Exemplo: Se você tiver um inimigo, você pode pegar o script dele e chamar uma função de dano.
-        // Exemplo de código:
-        /*
+        // Tenta achar o script "Enemy" no objeto que a bala acertou
         Enemy enemy = hitInfo.GetComponent<Enemy>();
+        
+        // Se achou o script (significa que acertou um inimigo)
         if (enemy != null)
         {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage); // Causa o dano definido na bala (ex: 10)
         }
-        */
-
-        // Destrói o projétil após a colisão (pode-se adicionar um efeito de explosão aqui).
+        // Destrói a bala ao bater em qualquer coisa (chão, parede ou inimigo)
         if(!hitInfo.CompareTag("Player")) Destroy(gameObject);
     }
 }
