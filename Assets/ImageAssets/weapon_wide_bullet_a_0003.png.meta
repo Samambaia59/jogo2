@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 99fddc08eb190b04d8439a965370f9c9
+guid: 355af5a1f0d0aa144ac844dd4d90790b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4317661579826027593
-    second: fundolala-removebg-preview_0
+      213: -1936284835679633216
+    second: weapon_wide_bullet_a_0003_0
+  - first:
+      213: 7725900026188042298
+    second: weapon_wide_bullet_a_0003_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fundolala-removebg-preview_0
+      name: weapon_wide_bullet_a_0003_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 30
-        width: 612
-        height: 304
+        x: 1
+        y: 7
+        width: 41
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7b32e1a4ba59414c0800000000000000
-      internalID: -4317661579826027593
+      spriteID: 0c00759633fe025e0800000000000000
+      internalID: -1936284835679633216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weapon_wide_bullet_a_0003_1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 0
+        width: 112
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a309e17e329e73b60800000000000000
+      internalID: 7725900026188042298
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      fundolala-removebg-preview_0: -4317661579826027593
+      weapon_wide_bullet_a_0003_0: -1936284835679633216
+      weapon_wide_bullet_a_0003_1: 7725900026188042298
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

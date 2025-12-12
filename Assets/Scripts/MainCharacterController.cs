@@ -17,6 +17,14 @@ public class MainCharacterController : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
 
+    // --- ADICIONADO: Configurações de Tiro ---
+    [Header("Combat Settings")]
+    public Transform firePoint;      // Onde o tiro nasce
+    public GameObject bulletPrefab;  // O prefab da bala
+    public float fireRate = 0.5f;    // Tempo entre tiros
+    private float nextFireTime = 0f; // Controle interno de tempo
+    // ----------------------------------------
+
     // Variáveis privadas
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -72,7 +80,31 @@ public class MainCharacterController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
+
+        // --- ADICIONADO: Input de Tiro ---
+        if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
+        {
+            Shoot();
+            nextFireTime = Time.time + fireRate;
+        }
+        // ---------------------------------
     }
+
+    // --- ADICIONADO: Função Shoot ---
+    void Shoot()
+    {
+        if (firePoint != null && bulletPrefab != null)
+        {
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            
+            if (anim != null)
+            {
+                // Usamos "SetTrigger" porque o tiro é uma ação rápida, não um estado contínuo
+                anim.SetTrigger("isshooting"); 
+            }
+        }
+    }
+    // --------------------------------
 
     // --- LÓGICA DE VIDA E DANO ---
     // Este método é chamado pelo Inimigo
